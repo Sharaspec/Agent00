@@ -4,6 +4,8 @@ Plan your day, move your body and eat well, together with friends.
 
 Daybloom is a daily planner, workout tracker and food diary in one web app, with light and dark mode and a social feed.
 
+**Completely free:** no trial, no paid plan. Anyone can use the planner, workouts and food log straight from the home page without an account; entries are saved in their browser. Creating a free account saves everything to the cloud (guest entries move over automatically) and unlocks friends and sharing.
+
 ## Features
 
 - **Today:** a time-based to-do list with categories. Bring over yesterday's unfinished tasks, track water and mood, and see progress rings for plan, movement and food.

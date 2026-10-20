@@ -5,7 +5,7 @@ import { Empty, Ring, Toast } from '../components/ui';
 import { TIPS } from '../data/tips';
 import type { Activity, DayNote, IdeaCategory, Meal, Task } from '../data/types';
 import { useAuth } from '../lib/auth';
-import { backend } from '../lib/backend';
+import { data } from '../lib/data';
 import { addDays, friendlyDate, fromISO, periodRange, todayISO } from '../lib/dates';
 import { useRows, useToast } from '../lib/hooks';
 import { fmt, sumBy, weeklyStreak } from '../lib/stats';
@@ -18,7 +18,7 @@ function greeting() {
 }
 
 export default function Today() {
-  const { profile } = useAuth();
+  const { me: profile } = useAuth();
   const [date, setDate] = useState(todayISO());
   const day = { from: date, to: date };
   const week = periodRange('week', date);
@@ -46,7 +46,7 @@ export default function Today() {
   const weekMinutes = sumBy(weekActs.rows, (a) => a.duration_min);
 
   async function addTask(t: string, cat: IdeaCategory, tm: string | null) {
-    const row = await backend.insert<Task>('tasks', { date, title: t, time: tm, category: cat, done: false });
+    const row = await data.insert<Task>('tasks', { date, title: t, time: tm, category: cat, done: false });
     tasks.setRows((r) => [...r, row]);
   }
 
@@ -60,16 +60,16 @@ export default function Today() {
 
   async function toggle(t: Task) {
     tasks.setRows((r) => r.map((x) => (x.id === t.id ? { ...x, done: !x.done } : x)));
-    await backend.update<Task>('tasks', t.id, { done: !t.done });
+    await data.update<Task>('tasks', t.id, { done: !t.done });
   }
 
   async function remove(t: Task) {
     tasks.setRows((r) => r.filter((x) => x.id !== t.id));
-    await backend.remove('tasks', t.id);
+    await data.remove('tasks', t.id);
   }
 
   async function carryOver() {
-    const prev = await backend.list<Task>('tasks', { from: addDays(date, -1), to: addDays(date, -1) });
+    const prev = await data.list<Task>('tasks', { from: addDays(date, -1), to: addDays(date, -1) });
     const open = prev.filter((t) => !t.done);
     for (const t of open) await addTask(t.title, t.category, t.time);
     toast.show(open.length ? `Moved ${open.length} unfinished task${open.length > 1 ? 's' : ''} from yesterday` : 'Nothing left over from yesterday');
@@ -78,7 +78,7 @@ export default function Today() {
   async function saveNote(patch: Partial<DayNote>) {
     if (!profile) return;
     const base = note ?? { water: 0, mood: null, note: '' };
-    const row = await backend.upsert<DayNote>('day_notes', {
+    const row = await data.upsert<DayNote>('day_notes', {
       id: `${profile.id}_${date}`,
       date,
       water: base.water,

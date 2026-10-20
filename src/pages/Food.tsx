@@ -5,7 +5,7 @@ import { RECIPES } from '../data/recipes';
 import { TIPS } from '../data/tips';
 import type { FoodItem, Meal, MealType, Recipe } from '../data/types';
 import { useAuth } from '../lib/auth';
-import { backend } from '../lib/backend';
+import { data } from '../lib/data';
 import { addDays, friendlyDate, todayISO } from '../lib/dates';
 import { useRows, useToast } from '../lib/hooks';
 import { fmt, sumBy } from '../lib/stats';
@@ -29,7 +29,7 @@ interface Entry {
 const emptyEntry: Entry = { name: '', calories: '', protein: '', carbs: '', fat: '', servings: '1' };
 
 export default function Food() {
-  const { profile } = useAuth();
+  const { me: profile } = useAuth();
   const [date, setDate] = useState(todayISO());
   const meals = useRows<Meal>('meals', { from: date, to: date });
   const recent = useRows<Meal>('meals', { from: addDays(todayISO(), -21), to: todayISO() });
@@ -64,7 +64,7 @@ export default function Food() {
   const results = query.trim() ? FOODS.filter((f) => f.name.toLowerCase().includes(query.trim().toLowerCase())).slice(0, 12) : FOODS.slice(0, 8);
 
   async function logItem(meal: MealType, item: { name: string; calories: number; protein: number; carbs: number; fat: number }, servings = 1) {
-    const row = await backend.insert<Meal>('meals', {
+    const row = await data.insert<Meal>('meals', {
       date,
       meal,
       name: item.name,
@@ -90,7 +90,7 @@ export default function Food() {
   async function remove(m: Meal) {
     meals.setRows((r) => r.filter((x) => x.id !== m.id));
     recent.setRows((r) => r.filter((x) => x.id !== m.id));
-    await backend.remove('meals', m.id);
+    await data.remove('meals', m.id);
   }
 
   const perServing = (m: Meal) => ({ name: m.name, calories: m.calories / m.servings, protein: m.protein / m.servings, carbs: m.carbs / m.servings, fat: m.fat / m.servings });

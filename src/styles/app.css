@@ -104,3 +104,19 @@
 .tip-card .badge { justify-self: start; }
 .task-row { flex-wrap: nowrap; }
 .list-item > .badge { flex: none; }
+
+/* Guest mode */
+.guest-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin: var(--sp-4) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
+  padding: var(--sp-3) var(--sp-4);
+  border: 2px dashed var(--border-soft);
+  border-radius: var(--r-lg);
+  background: var(--surface);
+  font-size: var(--fs-sm);
+}
+.account-prompt ul { margin: 0; padding-left: 1.2em; }

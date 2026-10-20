@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { backend } from '../lib/backend';
 import { useTheme } from '../lib/hooks';
 import { useAuth } from '../lib/auth';
@@ -17,7 +17,7 @@ const NAV = [
 
 export default function AppShell() {
   const { theme, toggle } = useTheme();
-  const { profile } = useAuth();
+  const { profile, isGuest, loading, imported } = useAuth();
   const links = NAV.map((n) => (
     <NavLink key={n.to} to={n.to} end={n.end} data-section={n.section} className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
       <span className="nav-icon"><Icon name={n.icon} /></span>
@@ -38,6 +38,9 @@ export default function AppShell() {
           <button className="btn btn-ghost btn-sm" onClick={toggle}>
             {theme === 'dark' ? '☀ Light mode' : '☾ Dark mode'}
           </button>
+          {isGuest && !loading && (
+            <Link to="/signup" className="btn btn-primary btn-sm">Save my progress, free</Link>
+          )}
           {profile && (
             <NavLink to="/app/profile" className="row-sm sidebar-user">
               <Avatar profile={profile} />
@@ -47,6 +50,17 @@ export default function AppShell() {
         </div>
       </aside>
       <main id="main" className="app-main">
+        {isGuest && !loading && (
+          <div className="guest-bar" role="note">
+            <span>You're using Daybloom as a guest. Your entries are saved in this browser.</span>
+            <Link to="/signup" className="btn btn-sm btn-primary">Create a free account</Link>
+          </div>
+        )}
+        {imported > 0 && (
+          <div className="guest-bar" role="status">
+            <span>Welcome! We moved {imported} guest entr{imported === 1 ? 'y' : 'ies'} into your account.</span>
+          </div>
+        )}
         <Outlet />
       </main>
       <nav className="tabbar" aria-label="Main">{links}</nav>

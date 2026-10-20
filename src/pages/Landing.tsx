@@ -128,6 +128,9 @@ export default function Landing() {
           >
             {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
           </button>
+          <Link to="/app" className="btn btn-ghost lp-try">
+            Try it now
+          </Link>
           <Link to="/login" className="btn btn-ghost lp-login">
             Log in
           </Link>
@@ -173,7 +176,8 @@ export default function Landing() {
               </Link>
             </div>
             <ul className="lp-trust" aria-label="Highlights">
-              <li>Free to start</li>
+              <li>100% free, no trial</li>
+              <li>No sign-up needed to try</li>
               <li>Light and dark mode</li>
               <li>Made for your phone</li>
             </ul>
@@ -258,6 +262,44 @@ export default function Landing() {
               <span className="lp-streak-txt">day<br />streak</span>
             </div>
           </div>
+        </section>
+
+        {/* ---------- Jump right in (no account needed) ---------- */}
+        <section className="lp-section lp-jump" aria-labelledby="jump-title">
+          <div className="lp-section-head">
+            <p className="eyebrow">No account needed</p>
+            <h2 id="jump-title" className="lp-h2">
+              Jump right in.
+            </h2>
+            <p className="muted lp-section-sub">
+              Open your planner, log a workout or track a meal right now. Create a free account whenever you
+              want to save it everywhere and share with friends.
+            </p>
+          </div>
+          <div className="lp-jump-grid">
+            <Link to="/app" className="lp-jump-card accent-planner">
+              <span className="pill-planner">Planner</span>
+              <span className="lp-jump-title">Plan today</span>
+              <span className="lp-jump-text">Add tasks with times, check them off, and shuffle the idea generator.</span>
+              <span className="lp-jump-go">Open planner →</span>
+            </Link>
+            <Link to="/app/workouts" className="lp-jump-card accent-workout">
+              <span className="pill-workout">Workouts</span>
+              <span className="lp-jump-title">Log a workout</span>
+              <span className="lp-jump-text">Walks, runs, rides, lifts and more, or follow a ready-made plan.</span>
+              <span className="lp-jump-go">Open workouts →</span>
+            </Link>
+            <Link to="/app/food" className="lp-jump-card accent-food">
+              <span className="pill-food">Food log</span>
+              <span className="lp-jump-title">Track a meal</span>
+              <span className="lp-jump-text">Quick-add foods, healthy recipes, calories and macros.</span>
+              <span className="lp-jump-go">Open food log →</span>
+            </Link>
+          </div>
+          <p className="lp-free-note">
+            <strong>Daybloom is completely free.</strong> No trial, no paid plan, no card. A free account lets you
+            keep your data on every device and follow friends.
+          </p>
         </section>
 
         {/* ---------- Three sections ---------- */}
