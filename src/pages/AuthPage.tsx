@@ -67,7 +67,7 @@ export default function AuthPage({ mode }: { mode: 'login' | 'signup' }) {
         </Link>
         <div>
           <h1>{isSignup ? 'Start your first bloom' : 'Welcome back'}</h1>
-          <p className="muted">{isSignup ? 'Plan your day, move your body and eat well, together with friends.' : 'Pick up where you left off.'}</p>
+          <p className="muted">{isSignup ? 'Completely free: no trial, no paid plan, no card. Anything you logged as a guest comes with you.' : 'Pick up where you left off.'}</p>
         </div>
 
         {backend.mode === 'demo' && (
@@ -110,9 +110,9 @@ export default function AuthPage({ mode }: { mode: 'login' | 'signup' }) {
 
         <p className="small muted">
           {isSignup ? (
-            <>Already have an account? <Link to="/login">Sign in</Link></>
+            <>Already have an account? <Link to="/login">Sign in</Link> · <Link to="/app">Not now, continue as a guest</Link></>
           ) : (
-            <>New here? <Link to="/signup">Create an account</Link></>
+            <>New here? <Link to="/signup">Create a free account</Link> or <Link to="/app">keep going as a guest</Link></>
           )}
         </p>
       </div>

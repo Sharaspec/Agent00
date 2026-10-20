@@ -10,7 +10,7 @@ import { activitySummary, fmt, mealSummary, series, sumBy, taskSummary, weeklySt
 type Metric = 'minutes' | 'distance' | 'calories';
 
 export default function Progress() {
-  const { profile } = useAuth();
+  const { me: profile } = useAuth();
   const [period, setPeriod] = useState<Period>('week');
   const [anchor, setAnchor] = useState(todayISO());
   const [metric, setMetric] = useState<Metric>('minutes');

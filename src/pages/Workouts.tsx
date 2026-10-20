@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
 import { Empty, Modal, Stat, Toast } from '../components/ui';
 import { ACTIVITY_TYPES, activityType, estimateCalories } from '../data/activityTypes';
 import type { Activity, CustomWorkout, Exercise, Level, WorkoutKind, WorkoutTemplate } from '../data/types';
 import { WORKOUT_TEMPLATES } from '../data/workouts';
 import { useAuth } from '../lib/auth';
-import { backend } from '../lib/backend';
+import { data } from '../lib/data';
 import { addDays, friendlyDate, periodRange, todayISO } from '../lib/dates';
 import { useRows, useToast } from '../lib/hooks';
 import { activitySummary, fmt } from '../lib/stats';
@@ -42,7 +43,7 @@ function exerciseLine(e: Exercise) {
 }
 
 export default function Workouts() {
-  const { profile } = useAuth();
+  const { me: profile, isGuest } = useAuth();
   const recentRange = { from: addDays(todayISO(), -30), to: addDays(todayISO(), 1) };
   const recent = useRows<Activity>('activities', recentRange);
   const custom = useRows<CustomWorkout>('custom_workouts');
@@ -70,7 +71,7 @@ export default function Workouts() {
     e.preventDefault();
     const minutes = Number(draft.duration);
     if (!minutes || minutes <= 0) return toast.show('Add how many minutes you worked out.');
-    const row = await backend.insert<Activity>('activities', {
+    const row = await data.insert<Activity>('activities', {
       date: draft.date,
       type: draft.type,
       name: draft.name.trim() || type.label,
@@ -79,7 +80,7 @@ export default function Workouts() {
       calories: draft.calories ? Number(draft.calories) : autoCalories,
       notes: draft.notes,
       exercises: draft.exercises,
-      shared: draft.shared,
+      shared: draft.shared && !isGuest,
     });
     recent.setRows((r) => [...r, row]);
     setDraft(blankDraft(draft.type));
@@ -88,7 +89,7 @@ export default function Workouts() {
 
   async function remove(a: Activity) {
     recent.setRows((r) => r.filter((x) => x.id !== a.id));
-    await backend.remove('activities', a.id);
+    await data.remove('activities', a.id);
   }
 
   async function saveCustom(e: FormEvent) {
@@ -96,7 +97,7 @@ export default function Workouts() {
     if (!building) return;
     const exercises = building.exercises.filter((x) => x.name.trim());
     if (!building.name.trim() || !exercises.length) return toast.show('Give it a name and at least one exercise.');
-    const row = await backend.insert<CustomWorkout>('custom_workouts', { name: building.name.trim(), kind: building.kind, exercises });
+    const row = await data.insert<CustomWorkout>('custom_workouts', { name: building.name.trim(), kind: building.kind, exercises });
     custom.setRows((r) => [...r, row]);
     setBuilding(null);
     toast.show('Workout saved');
@@ -167,10 +168,16 @@ export default function Workouts() {
             <label className="label" htmlFor="w-notes">Notes</label>
             <textarea id="w-notes" className="textarea" rows={2} placeholder="How did it feel?" value={draft.notes} onChange={(e) => set({ notes: e.target.value })} />
           </div>
-          <label className="row small" style={{ alignItems: 'center' }}>
-            <input type="checkbox" className="checkbox" checked={draft.shared} onChange={(e) => set({ shared: e.target.checked })} />
-            Share with my followers
-          </label>
+          {isGuest ? (
+            <p className="small muted">
+              <Link to="/signup">Create a free account</Link> to share workouts with friends and keep your history on every device.
+            </p>
+          ) : (
+            <label className="row small" style={{ alignItems: 'center' }}>
+              <input type="checkbox" className="checkbox" checked={draft.shared} onChange={(e) => set({ shared: e.target.checked })} />
+              Share with my followers
+            </label>
+          )}
           <p className="small muted">Calories are estimated from activity type, time and your weight{profile?.weight_kg ? '' : ' (add it in Profile for better estimates)'}.</p>
           <button className="btn btn-primary">Log activity</button>
         </form>
@@ -206,7 +213,7 @@ export default function Workouts() {
                   <div className="stack" style={{ gap: 0 }}>
                     <strong>{a.name}</strong>
                     <span className="small muted">
-                      {friendlyDate(a.date)} · {a.duration_min} min{a.distance_km ? ` · ${fmt(a.distance_km, 1)} km` : ''} · {fmt(a.calories)} kcal{a.shared ? '' : ' · private'}
+                      {friendlyDate(a.date)} · {a.duration_min} min{a.distance_km ? ` · ${fmt(a.distance_km, 1)} km` : ''} · {fmt(a.calories)} kcal{a.shared || isGuest ? '' : ' · private'}
                     </span>
                   </div>
                   <button className="icon-btn" aria-label={`Delete ${a.name}`} onClick={() => remove(a)}>×</button>
@@ -264,7 +271,7 @@ export default function Workouts() {
               <button
                 className="btn btn-danger"
                 onClick={async () => {
-                  await backend.remove('custom_workouts', viewing.id);
+                  await data.remove('custom_workouts', viewing.id);
                   custom.setRows((r) => r.filter((x) => x.id !== viewing.id));
                   setViewing(null);
                 }}

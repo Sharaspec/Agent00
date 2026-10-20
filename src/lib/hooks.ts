@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { backend, type DateRange, type Table } from './backend';
+import { type DateRange, type Table } from './backend';
+import { useAuth } from './auth';
+import { data } from './data';
 
 /** Loads the signed-in user's rows from a table and reloads on demand. */
 export function useRows<T>(table: Table, range?: DateRange) {
@@ -9,13 +11,16 @@ export function useRows<T>(table: Table, range?: DateRange) {
   const from = range?.from;
   const to = range?.to;
   const req = useRef(0);
+  const { profile, loading: authLoading } = useAuth();
+  const owner = profile?.id ?? 'guest';
 
   const reload = useCallback(async () => {
+    if (authLoading) return;
     const id = ++req.current;
     try {
-      const data = await backend.list<T>(table, from && to ? { from, to } : undefined);
+      const result = await data.list<T>(table, from && to ? { from, to } : undefined);
       if (id === req.current) {
-        setRows(data);
+        setRows(result);
         setError(null);
       }
     } catch (e) {
@@ -23,7 +28,9 @@ export function useRows<T>(table: Table, range?: DateRange) {
     } finally {
       if (id === req.current) setLoading(false);
     }
-  }, [table, from, to]);
+    // owner: reload when someone signs in or out
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [table, from, to, owner, authLoading]);
 
   useEffect(() => {
     reload();

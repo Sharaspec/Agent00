@@ -7,6 +7,8 @@ Daybloom runs in two modes:
 
 The app switches to live mode automatically when two environment variables are set.
 
+In both modes, visitors can use the planner, workouts and food log as **guests** without signing up. Guest entries stay in their browser and move into their account when they create one. Friends, sharing and the profile page need a (free) account.
+
 ---
 
 ## 1. Deploy to Netlify
@@ -28,7 +30,16 @@ npm run build
 npx netlify-cli deploy --prod --dir=dist
 ```
 
-## 2. Turn on real accounts with Supabase (free tier is fine)
+## 2. Supabase
+
+**Already done for this repo:** a free Supabase project named `daybloom` (ref `nafkehwgupcchewebnla`) has the schema from `supabase/schema.sql` applied, and its URL and anon key are set in `netlify.toml`, so Netlify builds use it automatically. The one remaining step is **Authentication → URL Configuration** in the Supabase dashboard:
+
+- **Site URL**: `https://dayblume.netlify.app`
+- **Redirect URLs**: `https://dayblume.netlify.app/**` and `https://deploy-preview-*--dayblume.netlify.app/**` (plus `http://localhost:5173/**` for local development)
+
+To set up a different Supabase project instead, follow the steps below.
+
+### Setting up your own Supabase project
 
 1. Create a project at [supabase.com](https://supabase.com).
 2. Open **SQL Editor → New query**, paste the contents of `supabase/schema.sql`, and click **Run**. This creates the tables and the privacy rules:
