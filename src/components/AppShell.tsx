@@ -39,7 +39,7 @@ export default function AppShell() {
             {theme === 'dark' ? '☀ Light mode' : '☾ Dark mode'}
           </button>
           {isGuest && !loading && (
-            <Link to="/signup" className="btn btn-primary btn-sm">Save my progress, free</Link>
+            <Link to="/signup" className="btn btn-primary btn-sm">Save my progress</Link>
           )}
           {profile && (
             <NavLink to="/app/profile" className="row-sm sidebar-user">
@@ -53,7 +53,7 @@ export default function AppShell() {
         {isGuest && !loading && (
           <div className="guest-bar" role="note">
             <span>You're using Daybloom as a guest. Your entries are saved in this browser.</span>
-            <Link to="/signup" className="btn btn-sm btn-primary">Create a free account</Link>
+            <Link to="/signup" className="btn btn-sm btn-primary">Create an account</Link>
           </div>
         )}
         {imported > 0 && (

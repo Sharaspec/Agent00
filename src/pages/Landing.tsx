@@ -135,7 +135,7 @@ export default function Landing() {
             Log in
           </Link>
           <Link to="/signup" className="btn btn-primary btn-sm lp-nav-cta">
-            Start free
+            Sign up
           </Link>
         </nav>
       </header>
@@ -166,7 +166,7 @@ export default function Landing() {
             </p>
             <div className="lp-cta-row">
               <Link to="/signup" className="btn btn-primary btn-lg">
-                Start blooming, free
+                Start blooming
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M5 12h14M13 6l6 6-6 6" />
                 </svg>
@@ -176,7 +176,6 @@ export default function Landing() {
               </Link>
             </div>
             <ul className="lp-trust" aria-label="Highlights">
-              <li>100% free, no trial</li>
               <li>No sign-up needed to try</li>
               <li>Light and dark mode</li>
               <li>Made for your phone</li>
@@ -272,7 +271,7 @@ export default function Landing() {
               Jump right in.
             </h2>
             <p className="muted lp-section-sub">
-              Open your planner, log a workout or track a meal right now. Create a free account whenever you
+              Open your planner, log a workout or track a meal right now. Create an account whenever you
               want to save it everywhere and share with friends.
             </p>
           </div>
@@ -296,9 +295,9 @@ export default function Landing() {
               <span className="lp-jump-go">Open food log →</span>
             </Link>
           </div>
-          <p className="lp-free-note">
-            <strong>Daybloom is completely free.</strong> No trial, no paid plan, no card. A free account lets you
-            keep your data on every device and follow friends.
+          <p className="lp-account-note">
+            <strong>Want to keep it?</strong> An account saves your data on every device and lets you follow
+            friends.
           </p>
         </section>
 

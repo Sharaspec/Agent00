@@ -170,7 +170,7 @@ export default function Workouts() {
           </div>
           {isGuest ? (
             <p className="small muted">
-              <Link to="/signup">Create a free account</Link> to share workouts with friends and keep your history on every device.
+              <Link to="/signup">Create an account</Link> to share workouts with friends and keep your history on every device.
             </p>
           ) : (
             <label className="row small" style={{ alignItems: 'center' }}>
