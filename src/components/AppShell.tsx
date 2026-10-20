@@ -35,8 +35,9 @@ export default function AppShell() {
         <nav className="stack-sm" aria-label="Main">{links}</nav>
         <div className="sidebar-footer">
           {backend.mode === 'demo' && <span className="badge badge-soft" title="Data is saved in this browser only">Demo mode</span>}
-          <button className="btn btn-ghost btn-sm" onClick={toggle}>
-            {theme === 'dark' ? '☀ Light mode' : '☾ Dark mode'}
+          <button className="btn btn-ghost btn-sm theme-toggle" onClick={toggle}>
+            <Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+            {theme === 'dark' ? 'Light mode' : 'Dark mode'}
           </button>
           {isGuest && !loading && (
             <Link to="/signup" className="btn btn-primary btn-sm">Save my progress</Link>

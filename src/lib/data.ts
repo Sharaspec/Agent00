@@ -121,7 +121,7 @@ export const GUEST_PROFILE: Profile = {
   username: 'guest',
   display_name: 'there',
   bio: '',
-  avatar_color: '#7048e8',
+  avatar_color: '#2e5aa7',
   is_public: false,
   weight_kg: null,
   goal_calories: 2000,

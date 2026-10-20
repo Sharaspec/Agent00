@@ -125,3 +125,6 @@
   font-size: var(--fs-sm);
 }
 .account-prompt ul { margin: 0; padding-left: 1.2em; }
+
+/* Secondary text-style actions inside stacked cards sit left, not floating centered */
+.card.stack > .btn-ghost.btn-sm { align-self: flex-start; margin-left: calc(-1 * var(--sp-3)); }

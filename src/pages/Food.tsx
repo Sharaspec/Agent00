@@ -9,6 +9,7 @@ import { data } from '../lib/data';
 import { addDays, friendlyDate, todayISO } from '../lib/dates';
 import { useRows, useToast } from '../lib/hooks';
 import { fmt, sumBy } from '../lib/stats';
+import Icon from '../components/Icon';
 
 const MEALS: { id: MealType; label: string }[] = [
   { id: 'breakfast', label: 'Breakfast' },
@@ -105,9 +106,9 @@ export default function Food() {
           <h1>{friendlyDate(date)}</h1>
         </div>
         <div className="row" style={{ gap: 6 }}>
-          <button className="icon-btn" aria-label="Previous day" onClick={() => setDate(addDays(date, -1))}>‹</button>
+          <button className="icon-btn" aria-label="Previous day" onClick={() => setDate(addDays(date, -1))}><Icon name="chevron-left" /></button>
           <input className="input date-input" type="date" aria-label="Pick a date" value={date} onChange={(e) => e.target.value && setDate(e.target.value)} />
-          <button className="icon-btn" aria-label="Next day" onClick={() => setDate(addDays(date, 1))}>›</button>
+          <button className="icon-btn" aria-label="Next day" onClick={() => setDate(addDays(date, 1))}><Icon name="chevron-right" /></button>
         </div>
       </header>
 
@@ -148,7 +149,7 @@ export default function Food() {
                         <span className="small muted">P {fmt(x.protein)} · C {fmt(x.carbs)} · F {fmt(x.fat)} g</span>
                       </div>
                       <span className="small">{fmt(x.calories)} kcal</span>
-                      <button className="icon-btn" aria-label={`Remove ${x.name}`} onClick={() => remove(x)}>×</button>
+                      <button className="icon-btn" aria-label={`Remove ${x.name}`} onClick={() => remove(x)}><Icon name="close" size={18} /></button>
                     </li>
                   ))}
                 </ul>
