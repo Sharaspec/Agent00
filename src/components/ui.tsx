@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import type { Profile } from '../data/types';
 import { periodLabel, shiftPeriod, todayISO, type Period } from '../lib/dates';
+import Icon from './Icon';
 
 export function Ring({ value, max, label, sub, color, size = 112 }: { value: number; max: number; label: string; sub?: string; color: string; size?: number }) {
   const r = 52;
@@ -67,7 +68,7 @@ export function PeriodPicker({ period, anchor, onChange }: { period: Period; anc
       </div>
       <div className="row" style={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <button className="icon-btn" aria-label="Previous" onClick={() => onChange(period, shiftPeriod(period, anchor, -1))}>
-          ‹
+          <Icon name="chevron-left" />
         </button>
         <strong>{periodLabel(period, anchor)}</strong>
         <div className="row" style={{ gap: 4 }}>
@@ -77,7 +78,7 @@ export function PeriodPicker({ period, anchor, onChange }: { period: Period; anc
             </button>
           )}
           <button className="icon-btn" aria-label="Next" onClick={() => onChange(period, shiftPeriod(period, anchor, 1))}>
-            ›
+            <Icon name="chevron-right" />
           </button>
         </div>
       </div>
@@ -136,7 +137,7 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
             {title}
           </h2>
           <button className="icon-btn" aria-label="Close" onClick={onClose}>
-            ×
+            <Icon name="close" />
           </button>
         </div>
         {children}

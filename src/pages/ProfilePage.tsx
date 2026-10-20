@@ -5,8 +5,9 @@ import type { Profile } from '../data/types';
 import { useAuth } from '../lib/auth';
 import { backend, type OAuthProvider } from '../lib/backend';
 import { useTheme, useToast } from '../lib/hooks';
+import Icon from '../components/Icon';
 
-const COLORS = ['#d6336c', '#7048e8', '#f76707', '#2f9e44', '#1c7ed6', '#e8590c', '#0c8599', '#ae3ec9'];
+const COLORS = ['#1f3a64', '#2e5aa7', '#3c5a73', '#4a6b8a', '#2d6670', '#4d7a62', '#5a5f73', '#7a6248'];
 
 const CONNECTIONS: { id: OAuthProvider; label: string }[] = [
   { id: 'google', label: 'Google' },
@@ -161,7 +162,8 @@ export default function ProfilePage() {
           <h2 id="settings-title" className="card-title">Settings</h2>
           <div className="row-between">
             <span>Appearance</span>
-            <button className="btn btn-ghost btn-sm" onClick={toggle}>{theme === 'dark' ? '☀ Switch to light' : '☾ Switch to dark'}</button>
+            <button className="btn btn-ghost btn-sm" onClick={toggle}><Icon name={theme === 'dark' ? 'sun' : 'moon'} size={18} />
+              {theme === 'dark' ? 'Switch to light' : 'Switch to dark'}</button>
           </div>
           <div className="row-between">
             <span>Storage</span>

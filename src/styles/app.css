@@ -17,13 +17,15 @@
 .streak-stat {
   align-items: center;
   text-align: center;
-  padding: var(--sp-3) var(--sp-4);
+  min-width: 140px;
+  padding: var(--sp-4);
+  border: var(--line) solid var(--border);
   border-radius: var(--r-lg);
-  background: var(--sun);
-  color: var(--on-sun);
+  background: var(--surface-2);
+  color: var(--text);
 }
-.streak-stat .stat-label,
-.streak-stat .muted { color: inherit; opacity: 0.85; }
+.streak-stat .stat-value { color: var(--brand); }
+.streak-stat .small { max-width: 18ch; }
 .macros { flex: 1 1 200px; max-width: 320px; }
 
 .stats-row {
@@ -82,7 +84,7 @@
   background: none;
   color: var(--text);
   font: inherit;
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
   cursor: pointer;
 }
@@ -93,10 +95,12 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: 2px solid var(--ink);
+  border: 1px solid rgba(15, 27, 45, 0.12);
   cursor: pointer;
+  transition: box-shadow var(--dur) var(--ease-out);
 }
-.swatch.active { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--ink); }
+.swatch:hover { box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px var(--border-strong); }
+.swatch.active { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--text); }
 .share-row a.chip { text-decoration: none; }
 .sidebar-user { align-items: center; color: var(--text); text-decoration: none; }
 .provider-btn { justify-content: center; width: 100%; }
@@ -114,9 +118,13 @@
   gap: var(--sp-3);
   margin: var(--sp-4) max(16px, env(safe-area-inset-right, 0px)) 0 max(16px, env(safe-area-inset-left, 0px));
   padding: var(--sp-3) var(--sp-4);
-  border: 2px dashed var(--border-soft);
+  border: var(--line) solid var(--border);
   border-radius: var(--r-lg);
   background: var(--surface);
+  color: var(--muted);
   font-size: var(--fs-sm);
 }
 .account-prompt ul { margin: 0; padding-left: 1.2em; }
+
+/* Secondary text-style actions inside stacked cards sit left, not floating centered */
+.card.stack > .btn-ghost.btn-sm { align-self: flex-start; margin-left: calc(-1 * var(--sp-3)); }

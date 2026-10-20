@@ -8,6 +8,7 @@ import { backend, type FeedItem, type FollowState } from '../lib/backend';
 import { friendlyDate } from '../lib/dates';
 import { useToast } from '../lib/hooks';
 import { fmt } from '../lib/stats';
+import Icon from '../components/Icon';
 
 type Tab = 'feed' | 'friends' | 'find';
 
@@ -137,7 +138,8 @@ export default function Friends() {
                     </div>
                     <div className="feed-actions">
                       <button className={`react-btn${item.kudoed ? ' active' : ''}`} aria-pressed={item.kudoed} onClick={() => kudos(item)}>
-                        ♥ Kudos{item.kudos ? ` · ${item.kudos}` : ''}
+                        <Icon name="heart" size={16} />
+                        Kudos{item.kudos ? ` · ${item.kudos}` : ''}
                       </button>
                     </div>
                   </div>

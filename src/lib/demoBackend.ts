@@ -26,7 +26,7 @@ const now = () => new Date().toISOString();
 function profile(p: Partial<Profile> & Pick<Profile, 'id' | 'username' | 'display_name'>): Profile {
   return {
     bio: '',
-    avatar_color: '#ff7a59',
+    avatar_color: '#1f3a64',
     is_public: true,
     weight_kg: null,
     goal_calories: 2000,
@@ -41,9 +41,9 @@ function profile(p: Partial<Profile> & Pick<Profile, 'id' | 'username' | 'displa
 function seed(): DemoDB {
   const t = todayISO();
   const people = [
-    profile({ id: 'demo-maya', username: 'maya.moves', display_name: 'Maya (example)', bio: 'Morning runner, weekend hiker.', avatar_color: '#5b8def' }),
-    profile({ id: 'demo-jordan', username: 'jordanlifts', display_name: 'Jordan (example)', bio: 'Push, pull, legs, repeat.', avatar_color: '#22a06b' }),
-    profile({ id: 'demo-sam', username: 'sam.cooks', display_name: 'Sam (example)', bio: 'Meal prep Sundays and long walks.', avatar_color: '#c25ce0' }),
+    profile({ id: 'demo-maya', username: 'maya.moves', display_name: 'Maya (example)', bio: 'Morning runner, weekend hiker.', avatar_color: '#2e5aa7' }),
+    profile({ id: 'demo-jordan', username: 'jordanlifts', display_name: 'Jordan (example)', bio: 'Push, pull, legs, repeat.', avatar_color: '#4d7a62' }),
+    profile({ id: 'demo-sam', username: 'sam.cooks', display_name: 'Sam (example)', bio: 'Meal prep Sundays and long walks.', avatar_color: '#7a6248' }),
   ];
   const act = (user_id: string, daysAgo: number, type: string, name: string, duration_min: number, distance_km: number | null, calories: number): Activity => ({
     id: uuid(), user_id, date: addDays(t, -daysAgo), type, name, duration_min, distance_km, calories, notes: '', exercises: [], shared: true, created_at: now(),

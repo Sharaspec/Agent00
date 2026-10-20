@@ -9,6 +9,7 @@ import { data } from '../lib/data';
 import { addDays, friendlyDate, fromISO, periodRange, todayISO } from '../lib/dates';
 import { useRows, useToast } from '../lib/hooks';
 import { fmt, sumBy, weeklyStreak } from '../lib/stats';
+import Icon from '../components/Icon';
 
 const MOODS = ['Rough', 'Meh', 'Okay', 'Good', 'Great'];
 
@@ -97,9 +98,9 @@ export default function Today() {
           <h1>{friendlyDate(date)}</h1>
         </div>
         <div className="row" style={{ gap: 6 }}>
-          <button className="icon-btn" aria-label="Previous day" onClick={() => setDate(addDays(date, -1))}>‹</button>
+          <button className="icon-btn" aria-label="Previous day" onClick={() => setDate(addDays(date, -1))}><Icon name="chevron-left" /></button>
           <input className="input date-input" type="date" aria-label="Pick a date" value={date} onChange={(e) => e.target.value && setDate(e.target.value)} />
-          <button className="icon-btn" aria-label="Next day" onClick={() => setDate(addDays(date, 1))}>›</button>
+          <button className="icon-btn" aria-label="Next day" onClick={() => setDate(addDays(date, 1))}><Icon name="chevron-right" /></button>
         </div>
       </header>
 
@@ -144,7 +145,7 @@ export default function Today() {
                     <span className="task-title">{t.title}</span>
                   </label>
                   <span className="badge">{CATEGORY_LABELS[t.category]}</span>
-                  <button className="icon-btn" aria-label={`Delete ${t.title}`} onClick={() => remove(t)}>×</button>
+                  <button className="icon-btn" aria-label={`Delete ${t.title}`} onClick={() => remove(t)}><Icon name="close" size={18} /></button>
                 </li>
               ))}
             </ul>
@@ -195,9 +196,9 @@ export default function Today() {
           <div className="field">
             <span className="label">Water</span>
             <div className="row" style={{ alignItems: 'center' }}>
-              <button className="icon-btn" aria-label="One less glass" onClick={() => saveNote({ water: Math.max(0, (note?.water ?? 0) - 1) })}>−</button>
+              <button className="icon-btn" aria-label="One less glass" onClick={() => saveNote({ water: Math.max(0, (note?.water ?? 0) - 1) })}><Icon name="minus" /></button>
               <strong>{note?.water ?? 0} / {profile?.goal_water ?? 8} glasses</strong>
-              <button className="icon-btn" aria-label="One more glass" onClick={() => saveNote({ water: (note?.water ?? 0) + 1 })}>+</button>
+              <button className="icon-btn" aria-label="One more glass" onClick={() => saveNote({ water: (note?.water ?? 0) + 1 })}><Icon name="plus" /></button>
             </div>
           </div>
           <div className="field">

@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import Icon from '../components/Icon';
 import { Empty, Modal, Stat, Toast } from '../components/ui';
 import { ACTIVITY_TYPES, activityType, estimateCalories } from '../data/activityTypes';
 import type { Activity, CustomWorkout, Exercise, Level, WorkoutKind, WorkoutTemplate } from '../data/types';
@@ -216,7 +217,7 @@ export default function Workouts() {
                       {friendlyDate(a.date)} · {a.duration_min} min{a.distance_km ? ` · ${fmt(a.distance_km, 1)} km` : ''} · {fmt(a.calories)} kcal{a.shared || isGuest ? '' : ' · private'}
                     </span>
                   </div>
-                  <button className="icon-btn" aria-label={`Delete ${a.name}`} onClick={() => remove(a)}>×</button>
+                  <button className="icon-btn" aria-label={`Delete ${a.name}`} onClick={() => remove(a)}><Icon name="close" size={18} /></button>
                 </li>
               ))}
             </ul>
@@ -316,7 +317,7 @@ export default function Workouts() {
                   <input id={`b-ex-${i}`} className="input" aria-label="Exercise" placeholder="Exercise" value={x.name} onChange={(e) => upd({ name: e.target.value })} />
                   <input id={`b-sets-${i}`} className="input" aria-label="Sets" type="number" min="0" placeholder="Sets" value={x.sets ?? ''} onChange={(e) => upd({ sets: e.target.value ? Number(e.target.value) : undefined })} />
                   <input id={`b-reps-${i}`} className="input" aria-label="Reps or time" placeholder="Reps / time" value={x.reps ?? ''} onChange={(e) => upd({ reps: e.target.value })} />
-                  <button type="button" className="icon-btn" aria-label="Remove exercise" onClick={() => setBuilding({ ...building, exercises: building.exercises.filter((_, j) => j !== i) })}>×</button>
+                  <button type="button" className="icon-btn" aria-label="Remove exercise" onClick={() => setBuilding({ ...building, exercises: building.exercises.filter((_, j) => j !== i) })}><Icon name="close" size={18} /></button>
                 </div>
               );
             })}

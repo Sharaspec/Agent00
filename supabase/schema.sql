@@ -11,7 +11,7 @@ create table if not exists public.profiles (
   username text not null unique check (username ~ '^[a-z0-9_.]{3,24}$'),
   display_name text not null default '',
   bio text not null default '' check (char_length(bio) <= 160),
-  avatar_color text not null default '#d6336c',
+  avatar_color text not null default '#2e5aa7',
   is_public boolean not null default true,
   weight_kg numeric,
   goal_calories int not null default 2000,
