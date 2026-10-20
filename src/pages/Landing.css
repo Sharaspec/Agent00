@@ -708,13 +708,13 @@
   text-decoration-thickness: 3px;
   text-underline-offset: 4px;
 }
-.lp-free-note {
+.lp-account-note {
   margin: var(--sp-5) auto 0;
   max-width: 60ch;
   text-align: center;
   color: var(--muted);
 }
-.lp-free-note strong { color: var(--text); }
+.lp-account-note strong { color: var(--text); }
 @media (max-width: 560px) {
   .lp-try { display: none; }
 }

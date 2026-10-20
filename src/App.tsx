@@ -36,8 +36,8 @@ export default function App() {
         <Route path="workouts" element={<Workouts />} />
         <Route path="food" element={<Food />} />
         <Route path="progress" element={<Progress />} />
-        <Route path="friends" element={<RequireAccount title="Bring your people" why="Create a free account to follow friends, share workouts and give kudos."><Friends /></RequireAccount>} />
-        <Route path="profile" element={<RequireAccount title="Make it yours" why="Create a free account to set your goals, save your data across devices and connect your social accounts."><ProfilePage /></RequireAccount>} />
+        <Route path="friends" element={<RequireAccount title="Bring your people" why="Create an account to follow friends, share workouts and give kudos."><Friends /></RequireAccount>} />
+        <Route path="profile" element={<RequireAccount title="Make it yours" why="Create an account to set your goals, save your data across devices and connect your social accounts."><ProfilePage /></RequireAccount>} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

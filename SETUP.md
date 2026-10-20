@@ -7,7 +7,7 @@ Daybloom runs in two modes:
 
 The app switches to live mode automatically when two environment variables are set.
 
-In both modes, visitors can use the planner, workouts and food log as **guests** without signing up. Guest entries stay in their browser and move into their account when they create one. Friends, sharing and the profile page need a (free) account.
+In both modes, visitors can use the planner, workouts and food log as **guests** without signing up. Guest entries stay in their browser and move into their account when they create one. Friends, sharing and the profile page need an account.
 
 ---
 
