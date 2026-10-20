@@ -28,7 +28,8 @@ export function createSupabaseBackend(url: string, key: string): Backend {
       if (res.data) return res.data as Profile;
       // The database trigger normally creates the profile; create it here if it hasn't yet.
       const base = (user.user_metadata?.username || user.email?.split('@')[0] || 'friend') as string;
-      const username = `${base.toLowerCase().replace(/[^a-z0-9_]/g, '')}${Math.floor(Math.random() * 900 + 100)}`;
+      const clean = base.toLowerCase().replace(/[^a-z0-9_.]/g, '').slice(0, 20) || 'friend';
+      const username = `${clean}${Math.floor(Math.random() * 900 + 100)}`;
       return check(
         await sb
           .from('profiles')

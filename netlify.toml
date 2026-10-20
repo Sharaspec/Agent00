@@ -4,6 +4,11 @@
 
 [build.environment]
   NODE_VERSION = "20"
+  # Supabase project "daybloom". Both values are public by design: they ship
+  # in the browser bundle, and row-level security protects the data.
+  # Never put the service_role key here.
+  VITE_SUPABASE_URL = "https://nafkehwgupcchewebnla.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5hZmtlaHdndXBjY2hld2VibmxhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI1MzEzMDAsImV4cCI6MjEwODEwNzMwMH0.US692imhv_4MjQG-VZy9JuBmYFFMvv3YplbHf2d1aiA"
 
 # Single-page app: let React Router handle every path.
 [[redirects]]
