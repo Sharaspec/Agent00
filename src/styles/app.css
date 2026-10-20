@@ -1,0 +1,106 @@
+/* App-specific layout pieces built on the tokens in theme.css. */
+
+.rings-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--sp-5);
+}
+.ring-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+  text-align: center;
+}
+.streak-stat {
+  align-items: center;
+  text-align: center;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--r-lg);
+  background: var(--sun);
+  color: var(--on-sun);
+}
+.streak-stat .stat-label,
+.streak-stat .muted { color: inherit; opacity: 0.85; }
+.macros { flex: 1 1 200px; max-width: 320px; }
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--sp-4);
+}
+
+.grid-2.tight { gap: var(--sp-3); }
+
+/* Planner */
+.task-form > .input:first-child { flex: 1 1 200px; min-width: 0; }
+.task-form > .input[type='time'] { flex: 0 0 120px; }
+.task-form > .select { flex: 0 0 130px; }
+.task-row {
+  flex: 1;
+  min-width: 0;
+  align-items: center;
+  gap: var(--sp-3);
+  cursor: pointer;
+}
+.task-time { width: 3.2em; flex: none; font-variant-numeric: tabular-nums; }
+.task-title { min-width: 0; overflow-wrap: anywhere; }
+.list-item.done .task-title { text-decoration: line-through; color: var(--muted); }
+.date-input { width: auto; min-width: 0; }
+
+/* Charts */
+.chart svg { display: block; overflow: visible; }
+.chart-labels {
+  display: flex;
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--chart-text);
+  font-variant-numeric: tabular-nums;
+}
+.chart-labels span { text-align: center; overflow: hidden; white-space: nowrap; }
+
+/* Workouts and food */
+.template-card,
+.recipe-card { justify-content: space-between; }
+.exercise-row { flex-wrap: nowrap; align-items: center; }
+.exercise-row > .input:first-child { flex: 1 1 auto; min-width: 0; }
+.exercise-row > .input:not(:first-child) { flex: 0 0 84px; min-width: 0; }
+.custom-macros > .input { flex: 1 1 80px; min-width: 0; }
+.food-results { max-height: 280px; overflow-y: auto; }
+.recipe-list { margin: 0; padding-left: 1.25em; display: grid; gap: var(--sp-1); }
+.tip-card { display: grid; gap: var(--sp-2); align-content: start; }
+.tip-card .card-title,
+.tip-card p { margin: 0; }
+
+.link-btn {
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+.link-btn:hover { text-decoration: underline; }
+
+/* Profile and social */
+.swatch {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+}
+.swatch.active { box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--ink); }
+.share-row a.chip { text-decoration: none; }
+.sidebar-user { align-items: center; color: var(--text); text-decoration: none; }
+.provider-btn { justify-content: center; width: 100%; }
+.demo-note { white-space: normal; line-height: 1.4; padding: var(--sp-2) var(--sp-3); }
+.tip-card .badge { justify-self: start; }
+.task-row { flex-wrap: nowrap; }
+.list-item > .badge { flex: none; }
